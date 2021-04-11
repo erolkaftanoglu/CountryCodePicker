@@ -59,6 +59,7 @@ class CountryCodePicker extends StatefulWidget {
   /// custom margin
   final bool customFlagMargin;
   final EdgeInsetsGeometry? flagMargin;
+  final EdgeInsets? arrowPadding;
 
   /// shows the flag
   final bool showFlag;
@@ -118,6 +119,7 @@ class CountryCodePicker extends StatefulWidget {
     this.dialogBackgroundColor,
     this.customFlagMargin = false,
     this.flagMargin,
+    this.arrowPadding,
     this.closeIcon = const Icon(Icons.close),
     Key? key,
   }) : super(key: key);
@@ -213,9 +215,11 @@ class CountryCodePickerState extends State<CountryCodePicker> {
                   flex: widget.alignLeft ? 0 : 1,
                   fit: widget.alignLeft ? FlexFit.tight : FlexFit.loose,
                   child: Padding(
-                      padding: widget.alignLeft
+                      padding: widget.customFlagMargin
                           ? const EdgeInsets.only(right: 16.0, left: 8.0)
-                          : const EdgeInsets.only(right: 16.0),
+                          : widget.alignLeft
+                              ? const EdgeInsets.only(right: 16.0, left: 8.0)
+                              : const EdgeInsets.only(right: 16.0),
                       child: Icon(
                         Icons.arrow_drop_down,
                         color: Colors.grey,
