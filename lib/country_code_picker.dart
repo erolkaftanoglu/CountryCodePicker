@@ -56,6 +56,10 @@ class CountryCodePicker extends StatefulWidget {
   /// because longer country names are displayed in one line
   final bool alignLeft;
 
+  /// custom margin
+  final bool customFlagMargin;
+  final EdgeInsetsGeometry? flagMargin;
+
   /// shows the flag
   final bool showFlag;
 
@@ -112,6 +116,8 @@ class CountryCodePicker extends StatefulWidget {
     this.showDropDownButton = false,
     this.dialogSize,
     this.dialogBackgroundColor,
+    this.customFlagMargin = false,
+    this.flagMargin,
     this.closeIcon = const Icon(Icons.close),
     Key? key,
   }) : super(key: key);
@@ -178,9 +184,11 @@ class CountryCodePickerState extends State<CountryCodePicker> {
                         ? Clip.none
                         : Clip.hardEdge,
                     decoration: widget.flagDecoration,
-                    margin: widget.alignLeft
-                        ? const EdgeInsets.only(right: 16.0, left: 8.0)
-                        : const EdgeInsets.only(right: 16.0),
+                    margin: widget.customFlagMargin
+                        ? widget.flagMargin
+                        : widget.alignLeft
+                            ? const EdgeInsets.only(right: 16.0, left: 8.0)
+                            : const EdgeInsets.only(right: 16.0),
                     child: Image.asset(
                       selectedItem!.flagUri!,
                       package: 'country_code_picker',
